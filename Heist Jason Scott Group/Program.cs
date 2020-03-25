@@ -8,7 +8,9 @@ namespace Heist_Jason_Scott_Group
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Plan Your Heist!");
+            var bankDifficultyLevel = 100;
+
+        Console.WriteLine("Plan Your Heist!");
 
             List<TeamMember> myTeam = new List<TeamMember>();
 
@@ -30,9 +32,14 @@ namespace Heist_Jason_Scott_Group
                 }
             }
 
-            foreach (var person in myTeam)
+            var teamStrength = myTeam.Sum(person => person.SkillLevel);
+            if (teamStrength >= bankDifficultyLevel)
             {
-                Console.WriteLine($"My team member's name is {person.Name}.  Their skill level is {person.SkillLevel} and courage is {person.CourageFactor}");
+                Console.WriteLine("You're rich! You've completed the heist!");
+            }
+            else
+            {
+                Console.WriteLine("Bummer! You're going to jail!");
             }
         }
 
@@ -41,12 +48,20 @@ namespace Heist_Jason_Scott_Group
             Console.Write("Enter your team member's name: ");
             var teamMemberName = Console.ReadLine();
             Console.Write("Enter your team member's skill level (this should be a positive integer): ");
-            var teamMemberSkillLevel = int.Parse(Console.ReadLine()); 
+            var teamMemberSkillLevel = int.Parse(Console.ReadLine());
+            if (teamMemberSkillLevel < 0)
+            {
+                Console.Write("Sorry, that is not a valid entry. Enter your team member's skill level (this should be a positive integer): ");
+                teamMemberSkillLevel = int.Parse(Console.ReadLine());
+            }
             Console.Write("Enter your team member's courage factor between 0.0 and 2.0: ");
             var teamMemberCourageFactor = decimal.Parse(Console.ReadLine());
-
+            if (teamMemberCourageFactor < 0.0m || teamMemberCourageFactor > 2.0m)
+            {
+                Console.Write("Sorry, you did not enter a valid number. Enter your team member's courage factor between 0.0 and 2.0: ");
+                teamMemberCourageFactor = decimal.Parse(Console.ReadLine());
+            }
             TeamMember newTeamMember = new TeamMember(teamMemberName, teamMemberSkillLevel, teamMemberCourageFactor);
-
             return newTeamMember;
         }
     }
