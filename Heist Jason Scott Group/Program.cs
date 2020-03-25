@@ -10,8 +10,7 @@ namespace Heist_Jason_Scott_Group
         {
             var bankDifficultyLevel = 100;
             var rng = new Random();
-            var luckValue = rng.Next(-10, 10);
-            bankDifficultyLevel += luckValue;
+           
 
         Console.WriteLine("Plan Your Heist!");
 
@@ -35,17 +34,27 @@ namespace Heist_Jason_Scott_Group
                 }
             }
 
-            var teamStrength = myTeam.Sum(person => person.SkillLevel);
-            Console.WriteLine($"Your team skill level is {teamStrength}.\nThe bank difficulty level is {bankDifficultyLevel}.");
-            if (teamStrength >= bankDifficultyLevel)
+            Console.WriteLine("How many trial runs would you like?");
+            var trialRuns = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < trialRuns; i++)
             {
-                Console.WriteLine("You're rich! You've completed the heist!");
-            }
-            else
-            {
-                Console.WriteLine("Bummer! You're going to jail!");
-            }
+                var luckValue = rng.Next(-10, 10);
+                bankDifficultyLevel += luckValue;
+                var teamStrength = myTeam.Sum(person => person.SkillLevel);
+                Console.WriteLine($"Your team skill level is {teamStrength}.\nThe bank difficulty level is {bankDifficultyLevel}.");
+                if (teamStrength >= bankDifficultyLevel)
+                {
+                    Console.WriteLine("You're rich! You've completed the heist!");
+                }
+                else
+                {
+                    Console.WriteLine("Bummer! You're going to jail!");
+                }
+                bankDifficultyLevel = 100;
+            }   
         }
+
 
         static TeamMember CreateTeamMember()
         {
