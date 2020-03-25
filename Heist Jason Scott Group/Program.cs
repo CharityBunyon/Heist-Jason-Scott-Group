@@ -8,11 +8,15 @@ namespace Heist_Jason_Scott_Group
     {
         static void Main(string[] args)
         {
-            var bankDifficultyLevel = 100;
             var rng = new Random();
+            var success = 0;
+            var failure = 0;
            
 
-        Console.WriteLine("Plan Your Heist!");
+            Console.WriteLine("Plan Your Heist!");
+            Console.Write("Set the bank's difficulty level: ");
+            var bankDifficultyLevel = int.Parse(Console.ReadLine());
+
 
             List<TeamMember> myTeam = new List<TeamMember>();
 
@@ -46,13 +50,16 @@ namespace Heist_Jason_Scott_Group
                 if (teamStrength >= bankDifficultyLevel)
                 {
                     Console.WriteLine("You're rich! You've completed the heist!");
+                    success += 1;
                 }
                 else
                 {
                     Console.WriteLine("Bummer! You're going to jail!");
+                    failure += 1;
                 }
-                bankDifficultyLevel = 100;
-            }   
+                bankDifficultyLevel -= luckValue;
+            }
+            Console.WriteLine($"You completed {success} successful attempts, and {failure} failed attempts.");
         }
 
 
