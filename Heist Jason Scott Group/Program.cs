@@ -9,6 +9,9 @@ namespace Heist_Jason_Scott_Group
         static void Main(string[] args)
         {
             var bankDifficultyLevel = 100;
+            var rng = new Random();
+            var luckValue = rng.Next(-10, 10);
+            bankDifficultyLevel += luckValue;
 
         Console.WriteLine("Plan Your Heist!");
 
@@ -33,6 +36,7 @@ namespace Heist_Jason_Scott_Group
             }
 
             var teamStrength = myTeam.Sum(person => person.SkillLevel);
+            Console.WriteLine($"Your team skill level is {teamStrength}.\nThe bank difficulty level is {bankDifficultyLevel}.");
             if (teamStrength >= bankDifficultyLevel)
             {
                 Console.WriteLine("You're rich! You've completed the heist!");
