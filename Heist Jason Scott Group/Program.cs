@@ -23,10 +23,16 @@ namespace Heist_Jason_Scott_Group
             var addTeammate = true;
             Console.WriteLine("Would you like to add a team member (y/n)?");
             var response = Console.ReadLine();
+            if (response.Equals("n", StringComparison.OrdinalIgnoreCase)) ;
+            {
+                Console.WriteLine("Sorry, invalid entry. Would you like to add a team member (y/n)?");
+                response = Console.ReadLine();
+            }
 
             while (addTeammate)
             {
                 if (response == "y" || response == "Y")
+                //if (response.Equals("y",StringComparison.OrdinalIgnoreCase))
                 {
                     myTeam.Add(CreateTeamMember());
                     Console.WriteLine($"Your team currently includes {myTeam.Count()} team member(s). Would you like to add another team member (y/n)?");
@@ -60,6 +66,7 @@ namespace Heist_Jason_Scott_Group
                 bankDifficultyLevel -= luckValue;
             }
             Console.WriteLine($"You completed {success} successful attempts, and {failure} failed attempts.");
+            Console.ReadLine();
         }
 
 
